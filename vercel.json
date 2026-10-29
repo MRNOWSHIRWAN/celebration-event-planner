@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/plan.js", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/plan", "dest": "/api/plan.js" },
+    { "src": "/", "dest": "/public/index.html" },
+    { "src": "/app.js", "dest": "/public/app.js" },
+    { "src": "/style.css", "dest": "/public/style.css" }
+  ]
+}
