@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celebration & Event Planner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#plan">Skip to plan</a>
+<header>
+  <h1>Celebration &amp; Event Planner</h1>
+  <p>Weddings, birthdays and community events: a budget, a timeline, a vendor checklist and ideas that fit you.</p>
+</header>
+<main>
+  <form id="form" novalidate aria-describedby="formerr">
+    <div class="grid">
+      <label>Event type
+        <select name="eventType" required>
+          <option value="wedding">Wedding</option>
+          <option value="birthday" selected>Birthday</option>
+          <option value="community">Community event</option>
+        </select>
+      </label>
+      <label>Guests
+        <input name="guests" type="number" min="1" max="5000" inputmode="numeric" required>
+      </label>
+      <label>Total budget (INR)
+        <input name="budget" type="number" min="1000" inputmode="numeric" required>
+      </label>
+      <label>Event date
+        <input name="date" type="date" required>
+      </label>
+      <label>City
+        <input name="city" type="text" maxlength="60" autocomplete="off">
+      </label>
+    </div>
+    <label>Preferences and notes (theme, food, family needs)
+      <textarea name="notes" rows="3" maxlength="500"></textarea>
+    </label>
+    <div id="formerr" class="error" role="alert" aria-live="assertive"></div>
+    <button type="submit" id="go">Make my plan</button>
+  </form>
+  <div id="status" role="status" aria-live="polite"></div>
+  <section id="plan" tabindex="-1" hidden></section>
+</main>
+<footer>Budget split and dates are calculated by the app. Ideas, checklist and vendor questions are written by a generative AI model and are suggestions, not quotes.</footer>
+<script src="app.js"></script>
+</body>
+</html>
