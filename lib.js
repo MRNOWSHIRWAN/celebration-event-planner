@@ -22,6 +22,7 @@ const EVENT_TYPES = {
 };
 
 function validate(input, today = new Date()) {
+  input = input || {};
   const errors = [];
   const eventType = String(input.eventType || '').toLowerCase();
   if (!EVENT_TYPES[eventType]) errors.push('Choose an event type: wedding, birthday or community.');
@@ -29,8 +30,9 @@ function validate(input, today = new Date()) {
   if (!Number.isInteger(guests) || guests < 1 || guests > 5000) errors.push('Guests must be a whole number from 1 to 5000.');
   const budget = Number(input.budget);
   if (!Number.isFinite(budget) || budget < 1000 || budget > 100000000) errors.push('Budget must be a number from 1,000 to 100,000,000.');
-  const date = new Date(String(input.date) + 'T00:00:00');
-  if (!input.date || Number.isNaN(date.getTime())) errors.push('Enter a valid event date.');
+  const dateStr = String(input.date || '');
+  const date = new Date(dateStr + 'T00:00:00');
+  if (!input.date || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr) || Number.isNaN(date.getTime()) || ymd(date) !== dateStr) errors.push('Enter a valid event date.');
   else {
     const t = new Date(today); t.setHours(0, 0, 0, 0);
     if (date < t) errors.push('The event date is in the past.');
